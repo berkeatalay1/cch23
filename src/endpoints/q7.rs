@@ -1,4 +1,4 @@
-use actix_web::{HttpRequest, HttpResponse,  get, http::header::map::Keys};
+use actix_web::{HttpRequest, HttpResponse,  get};
 use base64::{Engine as _, engine::general_purpose};
 use serde_json::{Value, json};
 
@@ -10,7 +10,7 @@ async fn cookie_endpoint(req:HttpRequest) -> HttpResponse {
 
     let opt_header = req.cookie("recipe").unwrap();
     let recipe_header = opt_header.value();
-    let recipe_binary = &general_purpose::STANDARD.decode(recipe_header.to_owned()).unwrap();
+    let recipe_binary = &general_purpose::STANDARD.decode(recipe_header).unwrap();
     let recipe_json = std::str::from_utf8(recipe_binary.as_ref()).unwrap();
 
     let recipe:Value = serde_json::from_str(recipe_json).unwrap();
@@ -22,7 +22,7 @@ async fn bake_cookie_endpoint(req:HttpRequest) -> HttpResponse {
 
     let opt_header = req.cookie("recipe").unwrap();
     let recipe_header = opt_header.value();
-    let recipe_binary = &general_purpose::STANDARD.decode(recipe_header.to_owned()).unwrap();
+    let recipe_binary = &general_purpose::STANDARD.decode(recipe_header).unwrap();
     let recipe_json = std::str::from_utf8(recipe_binary.as_ref()).unwrap();
 
     let bake_json:Value = serde_json::from_str(recipe_json).unwrap();

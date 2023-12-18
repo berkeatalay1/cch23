@@ -40,7 +40,7 @@ fn count_words(s:&str) -> (usize,usize,usize) {
         } 
         i += 1;
     }
-    return (count_elf,count_elf_on_a_shelf,count_shelf);
+    (count_elf,count_elf_on_a_shelf,count_shelf)
 }
 
 #[cfg(test)]

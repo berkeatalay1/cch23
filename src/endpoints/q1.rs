@@ -7,7 +7,7 @@ async fn xor_pow_endpoint(path: Path<(i32,String)>) -> HttpResponse {
     let mut response_xor = input1;
 
     for item in remaining_inputs{
-        response_xor = response_xor ^ item;
+        response_xor ^= item;
     }
     let powed_input = response_xor.pow(3);
     HttpResponse::Ok().json(powed_input)
