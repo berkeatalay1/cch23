@@ -55,9 +55,6 @@ async fn bake_cookie_endpoint(req:HttpRequest) -> HttpResponse {
         cookies: total_cookies_possible,
         pantry: response_value
     };
-    println!("---------------------- response -------------------------");
-    println!("{:?}",serde_json::json!(response));
-    println!("---------------------- response -------------------------");
 
     HttpResponse::Ok().json(response)
 }
