@@ -2,7 +2,7 @@ pub mod endpoints;
 pub mod models;
 
 use actix_web::web::ServiceConfig;
-use endpoints::{qminus1::{hello_world, error_example}, q1::xor_pow_endpoint, q4::{reindeer_strength_endpoint, reindeer_contest_endpoint}, q6::elf_string_endpoint, q7::{cookie_endpoint, bake_cookie_endpoint}, q8::{pokemon_weigth_endpoint, pokemon_drop_endpoint}};
+use endpoints::{qminus1::{hello_world, error_example}, q1::xor_pow_endpoint, q4::{reindeer_strength_endpoint, reindeer_contest_endpoint}, q6::elf_string_endpoint, q7::{cookie_endpoint, bake_cookie_endpoint}, q8::{pokemon_weigth_endpoint, pokemon_drop_endpoint}, q11::{decoration_png_endpoint, count_super_red_endpoint}};
 use shuttle_actix_web::ShuttleActixWeb;
 
 
@@ -19,7 +19,9 @@ async fn main() -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clon
         .service(cookie_endpoint)
         .service(bake_cookie_endpoint)
         .service(pokemon_weigth_endpoint)
-        .service(pokemon_drop_endpoint);
+        .service(pokemon_drop_endpoint)
+        .service(decoration_png_endpoint)
+        .service(count_super_red_endpoint);
     };
 
     Ok(config.into())
