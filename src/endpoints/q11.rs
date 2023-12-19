@@ -1,7 +1,6 @@
-use std::io::Read;
 
 use actix_multipart::form::MultipartForm;
-use actix_web::{get, HttpRequest, Responder, web::Form, post, HttpResponse};
+use actix_web::{get, HttpRequest, Responder, post, HttpResponse};
 use image::GenericImageView;
 
 use crate::models::q11::Image;
