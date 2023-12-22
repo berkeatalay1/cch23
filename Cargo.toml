@@ -16,4 +16,6 @@ base64 = "0.21.5"
 reqwest = "0.11.22"
 actix-multipart = "0.6.1"
 image = "0.24"
-
+ulid = { version = "1.1.0", features = ["uuid"] }
+uuid = "1.6.1"
+chrono = "0.4.31"
