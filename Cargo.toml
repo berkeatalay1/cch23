@@ -21,3 +21,4 @@ image = "0.24"
 ulid = { version = "1.1.0", features = ["uuid"] }
 uuid = "1.6.1"
 chrono = "0.4.31"
+handlebars = "4.5.0"
