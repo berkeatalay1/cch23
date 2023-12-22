@@ -4,21 +4,21 @@ use actix_web::{get, post, HttpResponse, web::{Path, ServiceConfig}};
 use tokio::time::Instant;
 use ulid::Ulid;
 use uuid::Uuid;
-use chrono::{DateTime, Datelike, Utc, Weekday};
+use chrono::{DateTime, Datelike, Utc};
 
-use crate::{Day12State, models::q12::ResUlit};
+use crate::{models::q12::ResUlit, AppState};
 
 
 
 #[post("/12/save/{payload}")]
-async fn save_payload(data: actix_web::web::Data<Day12State>, path: Path<String>) ->  HttpResponse {
+async fn save_payload(data: actix_web::web::Data<AppState>, path: Path<String>) ->  HttpResponse {
     let mut packets = data.packets.write().await;
     packets.insert(path.into_inner(), Instant::now());
     HttpResponse::Ok().finish()
 }
 
 #[get("/12/load/{payload}")]
-async fn get_payload(data: actix_web::web::Data<Day12State>, path: Path<String>,) ->  HttpResponse {
+async fn get_payload(data: actix_web::web::Data<AppState>, path: Path<String>,) ->  HttpResponse {
     let packets = data.packets.read().await;
     let instant = packets.get(&path.into_inner()).unwrap();
     HttpResponse::Ok().body(instant.elapsed().as_secs().to_string())
@@ -70,7 +70,6 @@ async fn ulit_weekdays(json:actix_web::web::Json<Vec<String>>, path: Path<u32>) 
 }
 
 pub fn day12_routes(cfg: &mut ServiceConfig) {
-    cfg.app_data(actix_web::web::Data::new(Day12State::default()));
     cfg.service(save_payload);
     cfg.service(get_payload);
     cfg.service(ulit_to_uuid);
